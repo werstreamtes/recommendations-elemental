@@ -3,7 +3,6 @@
 namespace WSE\Elemental\Recommendations\Model;
 
 use Content;
-use DNADesign\Elemental\Forms\TextCheckboxGroupField;
 use DNADesign\Elemental\Models\BaseElement;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\ArrayList;
@@ -85,7 +84,8 @@ class Recommendations extends BaseElement
     /**
      * @return mixed|DataObject|DBField|string|null
      */
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->getField('Title') ?? 'Das könnte dir auch gefallen';
     }
 
@@ -104,6 +104,15 @@ class Recommendations extends BaseElement
     {
 
         $fields = parent::getCMSFields();
+
+        $title = $fields->fieldByName('Root.Main.Title');
+        $title->setDescription('Use the placeholder <em>%TITLE%</em> to display the title on which the recommendations are based.');
+
+        if ($this->ContentID) {
+            $content = $fields->fieldByName('Root.Main.ContentID');
+            $year = $this->Content()->Year ? ", {$this->Content()->Year}" : '';
+            $content->setDescription("<a href=\"{$this->Content()->getLink()}\" target=\"_blank\">{$this->Content()->Title}{$year}</a>");
+        }
 
         $fields->removeFieldsFromTab('Root.Main', [
             'ElementLinkTarget',
@@ -157,7 +166,7 @@ class Recommendations extends BaseElement
     {
         $blockSchema = parent::provideBlockSchema();
         if ($this->ContentID) {
-            $blockSchema['content'] = "Vorschläge basierend auf „{$this->Content()->Title}”";
+            $blockSchema['content'] = "Recommendations based on „{$this->Content()->Title}”";
         }
         return $blockSchema;
     }
