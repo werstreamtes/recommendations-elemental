@@ -1,0 +1,8 @@
+---
+name: recommendations-elemental
+---
+DNADesign\Elemental\Models\BaseElement:
+  extensions:
+    - DNADesign\ElementalList\Extension\BaseElementCMSEditLinkExtension
+DNADesign\ElementalList\Model\ElementalList:
+  inline_editable: true

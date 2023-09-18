@@ -1,0 +1,22 @@
+{
+  "name": "werstreamtes/recommendations-elemental",
+  "description": "Recommendations slider extension for Elemental",
+  "type": "silverstripe-vendormodule",
+  "keywords": [
+    "silverstripe",
+    "CMS"
+  ],
+  "license": "BSD-3-Clause",
+  "require": {
+    "silverstripe/framework": "^4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "WSE\\Elemental\\Recommendations\\": "src/"
+    }
+  },
+  "extra": {
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
